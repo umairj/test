@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+    </head>
+    <body>
+        <p id="geolocation">Finding geolocation...</p>
+        
+        <a href="#" onClick="onLinkClick();">Click here</a>
+
+        <script type="text/javascript" src="cordova-2.6.0.js"></script>
+        <script type="text/javascript" charset="utf-8">
+
+		    // Wait for PhoneGap to load
+		    //
+		    document.addEventListener("deviceready", onDeviceReady, false);
+		
+		    // PhoneGap is ready
+		    //
+		    function onDeviceReady() {
+		    	alert(1);
+		    }
+		    
+		    function onLinkClick(){
+		    	//alert(2);
+		    	alert( typeof 2 );
+		    	alert( typeof navigator );
+		    	alert( typeof navigator.geolocation );
+		    	if(typeof navigator.geolocation == "object") {
+		    		alert('object');
+		    		setInterval( function(){
+		    			console.log(123);
+		    		    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+		    		},
+		    		5000);
+		    	}
+		    	else {
+		    		alert('no');
+		    	}
+		    }
+		
+		    // onSuccess Geolocation
+		    //
+		    var onSuccess = function(position) {
+		    	alert(1);
+		        var element = document.getElementById('geolocation');
+		        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+		                            'Longitude: '          + position.coords.longitude             + '<br />' +
+		                            'Altitude: '           + position.coords.altitude              + '<br />' +
+		                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
+		                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+		                            'Heading: '            + position.coords.heading               + '<br />' +
+		                            'Speed: '              + position.coords.speed                 + '<br />' +
+		                            'Timestamp: '          + new Date(position.timestamp)          + '<br />';
+		    }
+		
+		    // onError Callback receives a PositionError object
+		    //
+		    var onError = function(error) {
+		        alert('code: '    + error.code    + '\n' +
+		              'message: ' + error.message + '\n');
+		    }
+		
+		    </script>
+
+    </body>
+</html>
